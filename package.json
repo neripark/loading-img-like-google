@@ -1,12 +1,14 @@
 {
   "scripts": {
-    "build": "webpack-cli --mode production",
-    "serve": "webpack-dev-server --mode development --host localhost"
+    "dev:build": "webpack-cli --mode production --watch",
+    "dev:serve": "webpack-dev-server --mode development --host localhost",
+    "dev": "npm-run-all -p dev:*"
   },
   "dependencies": {
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.2",
+    "npm-run-all": "^4.1.3",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "webpack": "^4.15.1",
