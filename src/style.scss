@@ -20,10 +20,8 @@ body { background-color: #eee; }
     display: block;
     padding-top: 100%;
   }
-
   .circular {
     height: 100%;
-    transform-origin: center center;
     width: 100%;
     position: absolute;
     top: 0;
@@ -31,28 +29,34 @@ body { background-color: #eee; }
     left: 0;
     right: 0;
     margin: auto;
-  }
-
-  .path {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-    animation: dash 1.5s ease-in-out infinite;
-    stroke-linecap: butt;
+    transform-origin: center center;
+    .path {
+      stroke-dasharray: 50, 100; // IEで変化させられないので固定値を設定
+      stroke-linecap: round;
+    }
     &.outside {
-      stroke: #368AC8;
+      animation: rotate-outside 1s linear infinite;
+      .path {
+        stroke: #368AC8;
+        animation: dash-outside 1.8s ease-in-out infinite;
+      }
     }
     &.inside {
-      stroke: #77C2DD;
+      animation: rotate-inside 2.1s linear infinite;
+      .path {
+        stroke: #77C2DD;
+        animation: dash-inside 2s ease-in-out infinite;
+      }
     }
   }
 
-  @keyframes rotate {
+  // outside -----
+  @keyframes rotate-outside {
     100% {
-      -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
-  @keyframes dash {
+  @keyframes dash-outside {
     0% {
       stroke-dasharray: 1, 200;
       stroke-dashoffset: 0;
@@ -64,6 +68,29 @@ body { background-color: #eee; }
     100% {
       stroke-dasharray: 89, 200;
       stroke-dashoffset: -124;
+    }
+  }
+  // inside -----
+  @keyframes rotate-inside {
+    0% {
+      transform: rotate(150deg);
+    }
+    100% {
+      transform: rotate(510deg);
+    }
+  }
+  @keyframes dash-inside {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -106;
     }
   }
 }
